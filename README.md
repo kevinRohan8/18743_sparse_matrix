@@ -1,12 +1,4 @@
-# 18743_sparse_matrix
-18743: Energy efficient sparse matrix multiplication optimizations using different hardware and algorithms.
+  Sparse Matrix-Vector Multiplication (SpMxV)  is widely used in modern day applications, like feature extraction, data analytics, numerical methods etc. The throughput obtained in sparse matrix multiplication is lower compared to dense matrix multiplication due to the compression format used to represent these matrices. The paper proposes a method to improve the energy efficiency and throughput obtained by performing hardware based acceleration using FPGA for sparse matrix multiplication. A comparative analysis between the various hardware and algorithms used to compute the product of such matrices is performed. Computation is performed on FPGA and CPU. The parallel nature of the representations of the sparse matrices is exploited by using a FPGA. The look up tables and flip flops available in the FPGA make it highly programmable and parralelizable in nature. The algorithm used is an Outer Product based Sparse Matrix Multiplication. This algorithm is of high memory bandwidth, runs in parallel and reduces the number of memory accesses. This reduces the overhead.
 
-Sparse matrices form are widely used in modern day applications of big data, data analytics etc. The multiplication of sparse matrices is costly because of the compression algorithm used.
-
-In this project we try and implement various energy efficient sparse matrix multiplication using different hardware and software. 
-
-Progress so far:
-
-Implemented the conventional processing for multiplication of a 4x4 sparse matrix using both CSR and CSC algorithms and ran the power analysis for both of the processes. 
-
-The power consumed by the CSR multiplication was lesser by 0.02W. This is due to the fact that more core-core power is used in the case of CSC sparse matrix multiplication due to increase in the direct memory access operation in CSC sparse matrix multiplication.
+  Sparse matrix multiplication was implemented on a 292x292 Matrix which has 292 non zero elements. The multiplication was initially performed using both CSR and CSC compressed sparse matrix multiplication both of them gave lower energy consumption due to better locality. The values obtained were nearly identical this is due to the fact both have very similar compression method but CSR is row-major and CSC is column-major. However, a slightly smaller value of energy consumption is obtained for CSC multiplication due to lesser number of indexing along with multiplication which reduces the time taken for multiplication.
+The C code for CSC based sparse matrix multiplication was synthesised using Vivado HLS which generated the VHDL files. This was used to simulate using Vivado keeping Artix 7 as the target FPGA. There was a 87.5% reduction in power compared to that of a CPU due to the fact that the nature of implementation in FPGA is more parallel compared to that of the conventional CPU. 
